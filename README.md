@@ -12,20 +12,21 @@
 ## 파이프라인 개요
 
 ```
-1. roboflow_match.py       Roboflow에서 원본 데이터 다운로드 및 매칭 (match_result_v3.json 생성)
+1. download_roboflow.py    Roboflow에서 원본 데이터 다운로드 + 라벨 맵 구성 (rf_map.json)
 2. meta_cropping.py        원본 YOLOv8 데이터셋에서 바구니 ROI 크롭 + 메타데이터 생성
 3. prompt_v1 / v3 / v4.py  Gemini API 기반 합성 이미지 생성 (버전별 프롬프트)
    ├── prompt_v1.py         (논문 V1 — 기본 삽입 프레임워크)
    ├── prompt_v3.py         (논문 V2/V3 — 구조 안정화, damage 파라미터 제거)
    └── prompt_v4.py         (논문 V4 — 최종 채택, 해상도/노이즈 매칭 + 고주파 억제)
-4. prepare_batches.py      match_merge가 요구하는 배치 폴더 구조 준비
-5. match_merge.py          pHash+SSIM 매칭 후 Poisson Blending으로 scene 수준 재합성
-6. basket_labeling.py /
+4. roboflow_match.py       합성 이미지와 원본을 매칭 (match_result_v3.json 생성)
+5. prepare_batches.py      match_merge가 요구하는 배치 폴더 구조 준비
+6. match_merge.py          pHash+SSIM 매칭 후 Poisson Blending으로 scene 수준 재합성
+7. cleanup_duplicate.py    합성 결과물 중복 이미지 제거
+8. basket_labeling.py /
    folder_binary_classify.py   empty/not_empty 라벨링 및 분류
-7. total_crops.py, cleanup_duplicate.py,
-   download_filter.py, filtering.py,
-   generate_labels.py          크롭 통합, 중복 제거, 데이터 누수 방지, YOLO 라벨 변환
-8. build_dataset.py        최종 YOLO 탐지 모델 학습셋 구성 (scene-level 재합성 이미지 기반)
+9. download_filter.py,
+   generate_labels.py          데이터 누수 방지, YOLO 라벨 변환
+10. build_dataset.py       최종 YOLO 탐지 모델 학습셋 구성 (scene-level 재합성 이미지 기반)
 ```
 
 ## 프롬프트 버전 (V1~V4)
@@ -75,19 +76,18 @@
 ```
 ttareungi-synthetic-detection/
 ├── README.md
-├── roboflow_match.py
+├── download_roboflow.py
 ├── meta_cropping.py
 ├── prompt_v1.py
 ├── prompt_v3.py
 ├── prompt_v4.py
+├── roboflow_match.py
 ├── prepare_batches.py
 ├── match_merge.py
+├── cleanup_duplicate.py
 ├── basket_labeling.py
 ├── folder_binary_classify.py
-├── total_crops.py
-├── cleanup_duplicate.py
 ├── download_filter.py
-├── filtering.py
 ├── generate_labels.py
 ├── build_dataset.py
 └── reference-experiments/
