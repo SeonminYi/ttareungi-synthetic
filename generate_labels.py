@@ -1,5 +1,5 @@
 """
-composed_output_v2/ 이미지들의 YOLO 라벨 생성
+composed_output/ 이미지들의 YOLO 라벨 생성
 meta/ 폴더의 xyxy 좌표 → YOLO 정규화 좌표(cx cy w h) 변환
 """
 
@@ -14,7 +14,7 @@ from pathlib import Path
 # ─────────────────────────────────────────
 BASE = os.path.join(os.environ.get("TTAREUNGI_DATA_DIR", "./data"), "yolo_retraining")
 
-COMPOSED_DIR  = os.path.join(BASE, "composed_output_v2")
+COMPOSED_DIR  = os.path.join(BASE, "composed_output")
 V5_BATCHES    = os.path.join(BASE, "v5_batches")
 DATASET_DIR   = os.path.join(BASE, "bicycle-basket-4")
 
