@@ -22,7 +22,7 @@ from skimage.metrics import structural_similarity as ssim
 
 ORIGINAL_IMAGES_DIR = os.path.join(os.environ.get("TTAREUNGI_DATA_DIR", "./data"), "yolo_retraining", "bicycle-basket-4", "train", "images")
 BATCHES_ROOT_DIR    = os.path.join(os.environ.get("TTAREUNGI_DATA_DIR", "./data"), "yolo_retraining", "v5_batches")
-FINAL_OUT_DIR       = os.path.join(os.environ.get("TTAREUNGI_DATA_DIR", "./data"), "yolo_retraining", "composed_output_v2")
+FINAL_OUT_DIR       = os.path.join(os.environ.get("TTAREUNGI_DATA_DIR", "./data"), "yolo_retraining", "composed_output")
 
 # ============== 매칭 파라미터 ==============
 
